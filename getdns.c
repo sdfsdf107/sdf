@@ -9,8 +9,9 @@ int main(int argc, char **argv)
 	char   **ptr, **pptr;
 	char addresslsit[1024];
 	char str[32];
+			int i=0;
 	
-	if((hptr = gethostbyname(domain)) == NULL)
+	if((hptr = gethostbyname(argv[1])) == NULL)
     {
  		return 0; 
     }
@@ -19,7 +20,6 @@ int main(int argc, char **argv)
     {
         case AF_INET:
         case AF_INET6:
-			int i=0;
 			for(ptr = hptr->h_aliases; *ptr != NULL; ptr++)
             	for(pptr=hptr->h_addr_list; *pptr!=NULL; pptr++) {
 				i+=snprintf(addresslsit+i,sizeof(addresslsit)-i,"%s %s\n",*ptr,inet_ntop(hptr->h_addrtype, *pptr, str, sizeof(str)));
